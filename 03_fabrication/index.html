@@ -80,14 +80,69 @@ To make the actuator, I first 3D printed molds from the SRT.
 
 <p class="margin">   
   While the actuator was solidifying, I began testing how to wire and program the pump that will move the 
-  actuator. I gathered some initial materials:
+  actuator. I gathered some initial materials: My microcontroller, the pump, and a PVC pipe.
 </p>
 
 <image style = "width: 75%"src = "../03_fabrication/pumpMaterials.jpg" alt = "Some of My Initial Materials"> </image>
 
 <p class="margin">   
+  I connected the microcontroller to an L298N on a breadboard, and I used a modified version of
+  code from the PS70 motor tutorial in Arduino. Below is the code I used for the pump:
+</p>
+
+<pre>
+<code>
+  const int A1A = D0;  // define pin D0 for A-1A 
+  const int A1B = D1;  // define pin D1 for A-1B 
+
+  int intakeTime = 500;
+  int outputTime = 500;
+
+  void setup() {
+    pinMode(A1A, OUTPUT);     // specify these pins as outputs
+    pinMode(A1B, OUTPUT);
+    digitalWrite(A1A, LOW);   // start with the motors off 
+    digitalWrite(A1B, LOW);
+
+  }
+
+  void loop() {
+    // output air 
+    digitalWrite(A1A, HIGH);   
+    digitalWrite(A1B, LOW);
+    delay(intakeTime);              // allow the motor to run for 4 seconds
+
+    // stop the motor
+    digitalWrite(A1A, LOW);   // setting both pins LOW stops the motor 
+    digitalWrite(A1B, LOW);   // redundant, but doesn't hurt 
+    delay(2000);              // keep the motor off for 2 seconds
+
+    // input air
+    digitalWrite(A1A, LOW);   
+    digitalWrite(A1B, HIGH);
+    delay(outputTime);              // allow the motor to run for 4 seconds
+
+    // stop the motor
+    digitalWrite(A1A, LOW);   // setting both pins LOW stops the motor 
+    digitalWrite(A1B, LOW);   // redundant, but doesn't hurt 
+    delay(2000);              // keep the motor off for 2 seconds
+
+  }
+</code>
+</pre>
+
+<p class="margin"> 
+  Since the pump I used was a water pump. I intended to place a water container inside the PVC
+  pipe for the pump to suck water from, so I 3D printed a base and lid for the pipe for me 
+  to mount the breadboard and pump on.
+</p>
+
+<p class="margin">   
 Sources used: <br></br>
-https://www.w3schools.com/html/html_links.asp <br></br>
+https://softroboticstoolkit.com/book/fr-fabrication<br></br>
+https://nathanmelenbrink.github.io/ps70/04_arduino/index.html<br></br>
+https://www.w3schools.com/html/html_links.asp<br></br>
+https://www.w3schools.com/html/html_computercode_elements.asp<br></br>
 
 
 </p>
