@@ -25,11 +25,107 @@
 
 <h3>Week 4: Microcontroller Programming</h3>
 
-<h4>[Do Something with an arduino]</h4>
+<h4>Stable Air Controlled Actuator</h4>
 
+<p class="margin">   
+  For this week's assignment, I created a larger actuator and figured out how to
+   control it with the air pump (the actuator and connection must be leak-free)
+  instead of the water pump. First, I 3D printed a large actuator mold:
+</p>
 
+<image style = "width: 50%"src = "../04_microcontroller/wk4LrgMolds.jpg" alt = "Large Actuator Mold"> </image>
 
+<p class="margin">   
+  To make the extra actuator bodies, I mixed AB silicon solution in a cup and used a vacuum former to remove any air bubbles, which
+  were a major issue since they resulted in the formation of gaps in the molded silicon (credit to Nathan 
+  for directing me to the vacuum-former).
+</p>
 
+<image style = "width: 50%"src = "../04_microcontroller/wk4VacuumBroad.jpg" alt = "Vacuum Former"> </image>
+<image style = "width: 50%"src = "../04_microcontroller/wk4VacuumBubbles.jpg" alt = "Bubbles in Silicone Solution"> </image>
+<image style = "width: 50%"src = "../04_microcontroller/wk4VacuumNoBubbles.jpg" alt = "Bubbles Removed by Vacuum"> </image>
+
+<p class="margin">   
+  I filled my main mold with AB silicon solution. Once the silicon solidified, I removed the 
+  central rod and threaded the exterior of the actuator:
+</p>
+
+<image style = "width: 50%"src = "../04_microcontroller/wk4Threaded.jpg" alt = "Threaded Actuator"> </image>
+
+<p class="margin">   
+  Then, I cut a piece of canvas fabric and joined it to the bottom of the actuator with silicon
+  to serve as a strain-limiting layer. Once this solidified, I inserted a tube into the actuator and
+  plugged the tube's surroundings with silicon:
+</p>
+
+<image style = "width: 50%"src = "../04_microcontroller/wk4DryingCanvas&Plug.jpg" alt = "Canvas Silicone Solidifying and Other Plugged Actuator"> </image>
+<image style = "width: 50%"src = "../04_microcontroller/wk4Canvas&Tube.jpg" alt = "Canvas Silicone Solidifying and Other Plugged Actuator"> </image>
+
+<p class="margin">   
+  Once solidified, I cut away the excess silicon:
+</p>
+
+<image style = "width: 50%"src = "../04_microcontroller/wk4Canvas&TubeScissors.jpg" alt = "Trimming Silicone with Scissors"> </image>
+
+<p class="margin">   
+  Then, I reconfigured the breadboard to add an external 12V power source to the pump (credit to Bobby for helping 
+  me realize that my 12V and ground cables were reversed):
+</p>
+
+<image style = "width: 50%"src = "../04_microcontroller/wk4Microcontroller.jpg" alt = "Some of My Initial Materials"> </image>
+
+<p class="margin">   
+  I connected the actuator to the pump. I initially planned on
+  using only one of the two pump air valves and reversing the voltage to change
+  the direction of air flow. But I realized that reversing direction of air flow in the 
+  valves did not work. To solve this, I used a three-way connector and pinched one of 
+  the tubes with my hands to control air flow (credit to Kassia for the pinching idea).
+</p>
+
+<image style = "width: 50%"src = "../03_fabrication/pumpMaterials.jpg" alt = "Some of My Initial Materials"> </image>
+
+<p class="margin">   
+  Here is the code (edited version of last week's) I used in Arduino to adjust and alternate the pump motor
+  speed (Bobby helped with setting up PWM):
+</p>
+
+<pre>
+<code>
+const int A1A = D0;  // define pin 12 for A-1A (PWM Speed)
+const int A1B = D1;  // define pin 14 for A-1B (direction)
+
+// setting PWM properties
+const int freq = 5000;
+const int resolution = 8;
+
+void setup() {
+  pinMode(A1A, OUTPUT);     // specify these pins as outputs
+  pinMode(A1B, OUTPUT);
+  ledcAttach(A1A, freq, resolution);
+  ledcWrite(A1A, 0);   // start with the motors off 
+  digitalWrite(A1B, LOW);
+}
+
+void loop() {
+  // start the motor at a high speed
+  ledcWrite(A1A, 255);
+  digitalWrite(A1B, LOW);
+  delay(2000);              // allow the motor to run for 2 seconds
+  // start the motor at a low speed
+  ledcWrite(A1A, 200);
+  digitalWrite(A1B, LOW);
+  delay(2000);              // allow the motor to run for 2 seconds
+}
+</pre>
+</code>
+
+<p class="margin">   
+  Here is the video of the soft robotic air-controlled bending actuator:
+</p>
+
+<video width="480" height="640" controls>
+  <source src="../04_microcontroller/PS70wk4Actuator2Video.mp4" type="video/mp4">
+</video>
 
 </div>
 </xmp>
