@@ -26,8 +26,65 @@
 <h3>Week 6: Electronic Inputs</h3>
 
 <h4>Assignment 1: Capactive Sensor<h4>
+<p class="margin">   
+  To make the capacitive sensor, I put copper tape onto two pieces of cardboard and connected them to 
+  a circuit breadboard.
+</p>
 
-<h4>Assignment 2: [Use + Calibrate Another Sensor]</h4>
+<image style = "width: 50%"src = "../06_inputs/wk6CapSensorRuler.jpg" alt = "Capacitive Sensor with Ruler"> </image>
+
+<p class="margin">  
+  I then recorded the Arduino values I saw at various distances and graphed them on desmos
+  to find a line of best fit. Although different from the actual physics-based graph, the line type that best 
+  fit the data points (highest r^2 value) was an exponential function. This may be a result of the jumpy Serial
+  Plotter readings, or I may have needed to take more data points at high distances. Below is a screenshot of my
+  plotted points and best-fit line:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6CapGraph.png" alt = "Capacitive Sensor Graph"> </image>
+
+<p class="margin">
+  To further callibrate, I could integrate this function 
+  into the Arduino code so that it prints distances to the Serial Monitor that are close to the actual distances
+  between the two plates. Below is a photo of my circuit configuration:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6CapSensorCircuit.jpg" alt = "Capacitive Sensor Circuit"> </image>
+
+<h4>Assignment 2: Flex/Pressure Sensor</h4>
+<p class="margin">   
+  I created a velostat flex sensor to use for the soft robotic glove. This sensor can help with finger motion tracking
+  in addition to glove actuator automation for the final project. 
+</p>
+
+<p class="margin">
+  To make the sensor, I followed instructions on <a href="https://lucstechblog.blogspot.com/2018/04/flex-and-pressure-sensors.html">Lucs Tech Blog</a>. 
+  First, I took a piece of masking tape. Then, I cut a short length of copper tape and gently folded the sticky side onto itself to make a flexible,
+   thin copper plate. I centered this copper piece on the tape. After this, I cut two identical small velostat rectangles. Then, I placed one
+   rectangle on top of the copper plate (the velostat should be wider and cover the whole copper plate). I added the other piece 
+   of velostat on top of the first and placed the next copper plate (making sure it does not touch the first copper plate). Lastly,
+   I sealed the other side with masking tape. This made the finished sensor. I would recommend using a more insulating tape material for future 
+   velostat sensors, as touching the paper masking tape with a conductive hand might potentially affect the sensor reading. 
+   Here is the finished sensor:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexSensor1.jpg" alt = "Flex Sensor"> </image>
+
+<p class="margin">
+  To test it, I hooked up both of the copper ends to a multimeter and measured the sensor's 
+  resistance when it was bent at different angles.
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">   
+  Sources used: <br></br>
+  https://nathanmelenbrink.github.io/ps70/06_input/index.html <br></br>
+  https://lucstechblog.blogspot.com/2018/04/flex-and-pressure-sensors.html <br></br>
+  https://cdn-shop.adafruit.com/datasheets/HandcraftingSensors.pdf <br></br>
+
+</p>
+
 
 </div>
 </xmp>
