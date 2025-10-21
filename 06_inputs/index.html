@@ -81,6 +81,40 @@
 <image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
 
 <p class="margin">   
+  Then, I connected the sensor to Arduino and graphed the approximate Arduino values returned at 
+  different bend angles.
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">   
+  Below is the best-fit line I computed through Desmos in order to calibrate the sensor:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">   
+  Using the equation of this line, I edited by Arduino code to print the approximate bend angle of the sensor:
+</p>
+
+<pre>
+<code>
+  
+</pre>
+</code>
+
+<p class="margin">   
+  I tested the degree value using the serial plotter to make sure the code was accurate. Then, I altered the 
+  circuit to include three LEDs and I re-programmed the code to light up the blue LED if the angle was 
+  bent by 30 degrees or less, the blue and the white if between 60 and 30 degrees, and all three LEDs if greater than
+   60 degrees. Below is a video of the bending sensor:
+</p>
+
+<video width="480" height="640" controls>
+  <source src="../03_fabrication/softRobotFirstAttempt.mp4" type="video/mp4">
+</video>
+
+<p class="margin">   
   Sources used: <br></br>
   https://nathanmelenbrink.github.io/ps70/06_input/index.html <br></br>
   https://lucstechblog.blogspot.com/2018/04/flex-and-pressure-sensors.html <br></br>
