@@ -25,10 +25,213 @@
 
 <h3>Week 7: Electronic Outputs</h3>
 
-
-
 <h4>Assignment: Minimum Viable Product for Final Project</h4>
+<p class="margin"> 
+  For my MVP, I created an assistive glove with soft robotic actuator on one finger. My goal 
+  was to test integrating the circuit and the valves, and I successfully controlled the air pump
+  motor in response to changing pressures applied to the fingertip velostat sensor. The glove
+  has one input device (the pressure sensor) and three output devices (the air pump and two valves).
+</p>
 
+<p class="margin">  
+  To create my MVP, I started by testing the individual valves and motor using Arduino to ensure
+  the code would successfully open and close the valves and turn on the pump. Then, I integrating 
+  the valves and pump into the circuit and tested their coordination with Arduino code. 
+</p>
+
+<image style = "width: 50%"src = "../07_outputs/wk7Circuit.jpg" alt = "Circuit"> </image>
+
+<p class="margin">  
+  Finally, I assembled the glove prototype by using a surgical glove as a base and attaching the soft robotic
+  actuator and the sensor to the index finger. After editing the Arduino code, I looked at the serial
+  monitor to get pressure threshold values and configured the MVP to activate the motor when the pressure
+  applied to the sensor exceeds a certain point. Here is a video of the pressure-activated pump motor feature
+   (filmed by Bobby):
+</p>
+
+<video width="480" height="640" controls>
+  <source src="../07_outputs/wk7MVPvideo.mov" type="video/mp4">
+</video>
+
+<p class="margin">   
+  Below is the final Arduino code I used:
+</p>
+<pre>
+<code>
+int updateInterval = 1; //used to change time interval
+unsigned long prevMillis; //previous time val in milliseconds
+int inflThreshold = 3800; //for sensor trigger
+int pauseThreshold = 3400; //for sensor trigger
+
+
+class Pump {
+  //Member Variables
+  int pinA;
+  int pinB;
+
+  public:
+  Pump(int pA, int pB) {
+      //Set up values for the member variables
+      pinA = pA;
+      pinB = pB;
+
+      //Declare pins
+      pinMode(pinA, OUTPUT);
+      pinMode(pinB, OUTPUT);
+
+      //Start with the pump off
+      digitalWrite(pinA, LOW);
+      digitalWrite(pinB, LOW);
+  }
+
+  //Class Functions
+    void runPump() {
+      //Turn on the motor
+      digitalWrite(pinA, HIGH);
+      digitalWrite(pinB, LOW);
+    }
+
+    void stopPump() {
+      //Turn off the motor
+      digitalWrite(pinA, LOW);
+      digitalWrite(pinB, LOW);
+    }
+};
+
+class Valve {
+  int pinA;
+  int pinB;
+
+  public:
+  Valve(int pA) {
+    pinA = pA;
+
+    //Declare pins
+    pinMode(pinA, OUTPUT);
+
+    //Start with the pump off
+    digitalWrite(pinA, LOW);
+  }
+
+  void open() { //test to make sure this actually opens valve and does not close it
+    digitalWrite(pinA, LOW);
+  }
+
+  void close() {
+    digitalWrite(pinA, HIGH);
+  }
+};
+
+class PressureSensor {
+  int analogPin;
+  long read;
+
+  public:
+  PressureSensor(int aPin) {
+    //Initiate vars
+    analogPin = aPin;
+  }
+
+  int sensePressure() {
+    // read the input on sensor analog pin
+    int sensorVal = analogRead(analogPin);
+    Serial.print("2500 4100 ");
+    Serial.println(sensorVal); 
+    return sensorVal;
+  }
+};
+
+//Components
+Pump mainPump(0, 2);
+Valve inValve(33);
+Valve outValve(15);
+PressureSensor sensor1(34);
+
+void inflate() {
+  mainPump.stopPump();
+  outValve.open();
+  inValve.close();
+  mainPump.runPump();
+}
+
+void deflate() {
+  mainPump.stopPump();
+  inValve.open();
+  outValve.close();
+  mainPump.runPump();
+}
+
+void pauseMotor() {
+  mainPump.stopPump();
+  inValve.open();
+  outValve.open();
+}
+
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+void loop(){
+  int pressure;
+  bool inf = false;
+  if (millis() - prevMillis > updateInterval) {
+    pressure = sensor1.sensePressure();
+    if (pressure > inflThreshold) {
+      inflate();
+    }
+    else if (pressure > pauseThreshold) {
+      deflate();
+    }
+    else {
+      pauseMotor();
+    }
+    //update the time
+    prevMillis = millis();
+  }
+}
+</pre>
+</code>
+
+
+<p class="margin">  
+  After validating that the MVP activated the pump with sensor input, I sketched a box enclosure
+  in Fusion:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">   
+  I laser-cut this box, hot-glued it, and placed the circuit board and pump inside. Here is a photo of 
+  the final MVP:
+</p>
+
+<image style = "width: 50%"src = "../07_outputs/wk7FinalMVP.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">  
+  To discover a time domain with the oscilloscope, I connected the pump wires:
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin">
+  I then realized that I had to better integrate the oscilloscope connections with the circuit while 
+  the pump is turned on. 
+</p>
+
+<image style = "width: 50%"src = "../07_outputs/wk7CircuitInBox.jpg" alt = "Multimeter"> </image>
+
+<p class="margin"> 
+  After re-integrating the oscilloscope connections, I tried triggering the pump with the finger sensor 
+  and then adjusting the vertical and horizontal positions to find the wave function.
+</p>
+
+<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+
+<p class="margin"> 
+  The height of the wave kept changing when the pump was on, and I was not able to find a clear,
+  repeating wave signal.
+</p>
 
 </div>
 </xmp>
