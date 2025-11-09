@@ -37,7 +37,7 @@
 <h5>Design Process:</h5>
 
 <p class="margin">  
-I initially planned on creating a mechanical finger using motors, chords, and wood panels to 
+I initially planned on creating a rigid finger using motors, chords, and wood panels to 
 test the mechanics of my overall glove design in a simplified form. After talking with Nathan,
 he suggested that I try soft robotics instead of microelectronics to make the glove. I was 
 initially unsure, but with further research, I realized that soft robotics is indeed a much more 
@@ -45,8 +45,8 @@ effective and feasible strategy for the product I want to create.
 </p>
 
 <p class="margin">  
-I used instructions on how to make an actuator from the Soft Robotics Toolkit (SRT). 
-To make the actuator, I first 3D printed molds from the SRT.
+I derived instructions on how to make an actuator from the Soft Robotics Toolkit (SRT). 
+To fabricate the actuator, I first 3D printed molds from the SRT.
 </p>
 
 <image style = "width: 75%"src = "../03_fabrication/printedMold.jpg" alt = "3D Printed Actuator Mold"> </image>
@@ -58,7 +58,7 @@ To make the actuator, I first 3D printed molds from the SRT.
 <image style = "width: 50%"src = "../03_fabrication/greasingMolds.jpg" alt = "Spraying Mold Release"> </image>
 
 <p class="margin">   
-  Then, I poured liquid silicone solution into the mold and clamped it to let the actuator body solidify. 
+  Then, I poured liquid silicone solution into a mold and clamped it to let the actuator body solidify. 
 </p>
 
 <image style = "width: 50%"src = "../03_fabrication/pouringSilicon.jpg" alt = "Pouring Silicon"> </image>
@@ -79,14 +79,14 @@ To make the actuator, I first 3D printed molds from the SRT.
 <image style = "width: 50%"src = "../03_fabrication/solidifyingActuator.jpg" alt = "Letting the Actuator Solidify"> </image>
 
 <p class="margin">   
-  While the actuator was solidifying, I began testing how to wire and program the pump that will move the 
+  While the silicone was solidifying, I began testing how to wire and program the pump that will move the 
   actuator. I gathered some initial materials: a microcontroller, the pump, and a PVC pipe.
 </p>
 
 <image style = "width: 50%"src = "../03_fabrication/pumpMaterials.jpg" alt = "Some of My Initial Materials"> </image>
 
 <p class="margin">   
-  I connected the microcontroller to an L298N on a breadboard, and I used a modified version of
+  I connected the microcontroller to an L298N motor driver on a breadboard, and I used a modified version of
   code from the PS70 motor tutorial in Arduino. Below is the code I used for the pump:
 </p>
 
@@ -132,8 +132,8 @@ To make the actuator, I first 3D printed molds from the SRT.
 </pre>
 
 <p class="margin"> 
-  Since the pump I used was a water pump. I intended to place a water container inside the PVC
-  pipe for the pump to suck water from, so I 3D printed a base and lid for the pipe for me 
+  Since the pump I used was a water-pump, I planned to place a water container inside the PVC
+  pipe to serve as a water source, and I 3D printed a base and lid for the pipe for me 
   to mount the breadboard and pump onto.
 </p>
 
@@ -151,7 +151,8 @@ To make the actuator, I first 3D printed molds from the SRT.
 
 <p class="margin"> 
   I let the actuator solidify overnight. When I took it out of the mold, part of the silicone was still
-  liquid. To resolve this, I coated the actuator in a new quick-drying silicone solution.
+  liquid. To resolve this, I coated the actuator in a layer of quick-drying silicone solution. I later realized
+   that the silicone had not fully solidified because I had not mixed the A - B solution enough.
 </p>
 
 <image style = "width: 50%"src = "../03_fabrication/dryingSiliconeCoating.jpg" alt = "Pipe Lid in Fusion"> </image>
@@ -160,7 +161,7 @@ To make the actuator, I first 3D printed molds from the SRT.
 
 <p class="margin"> 
   After the silicone dried, I plugged the actuator using hot glue. After trial and error, I ended up double threading
-  the exterior of the actuator and using water with the pump. This was my first time doing soft
+  the exterior of the actuator and using water with the pump (after first trying it with just air). This was my first time doing soft
   robotics and using a water pump. Here is the finished first iteration of the robotic finger prototype (it bends!):
 </p>
 

@@ -62,9 +62,9 @@
 <p class="margin">
   To make the sensor, I followed instructions on <a href="https://lucstechblog.blogspot.com/2018/04/flex-and-pressure-sensors.html">Lucs Tech Blog</a>. 
   First, I took a piece of masking tape. Then, I cut a short length of copper tape and gently folded the sticky side onto itself to make a flexible,
-   thin copper plate. I centered this copper piece on the tape. After this, I cut two identical small velostat rectangles. Then, I placed one
-   rectangle on top of the copper plate (the velostat should be wider and cover the whole copper plate). I added the other piece 
-   of velostat on top of the first and placed the next copper plate (making sure it does not touch the first copper plate). Lastly,
+   thin copper plate. I centered this copper piece on the tape. After this, I cut two identical, small velostat rectangles. Then, I placed one
+   rectangle on top of the copper plate (the velostat should be wider than the copper piece to cover the whole copper plate). I added the other piece 
+   of velostat on top of the first and placed the next copper plate (making sure it did not touch the first copper plate). Lastly,
    I sealed the other side with masking tape. This made the finished sensor. I would recommend using a more insulating tape material for future 
    velostat sensors, as touching the paper masking tape with a conductive hand might potentially affect the sensor reading. 
    Here is the finished sensor:
@@ -79,39 +79,120 @@
 </p>
 
 <image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+<image style = "width: 50%"src = "../06_inputs/wkSixSensorAngleBending.jpg" alt = "Angle Measure"> </image>
 
 <p class="margin">   
   Then, I connected the sensor to Arduino and graphed the approximate Arduino values returned at 
   different bend angles.
 </p>
 
-<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+<image style = "width: 50%"src = "../06_inputs/wkSixFlexCircuitforCallibration.jpg" alt = "Callibration Circuit"> </image>
 
 <p class="margin">   
   Below is the best-fit line I computed through Desmos in order to calibrate the sensor:
 </p>
 
-<image style = "width: 50%"src = "../06_inputs/wk6FlexMultimeter.jpg" alt = "Multimeter"> </image>
+<image style = "width: 50%"src = "../06_inputs/wkSixArduinoCallibrationGraph.png" alt = "Callibration Graph"> </image>
 
 <p class="margin">   
-  Using the equation of this line, I edited by Arduino code to print the approximate bend angle of the sensor:
+  Using the equation of this line, I edited the Arduino code to print the approximate bend angle of the sensor. 
+  I tested the degree value using the serial plotter to make sure the code was accurate. Then, I altered the 
+  circuit to include three LEDs and I re-programmed the code to light up the blue LED if the angle was 
+  bent by 30 degrees or less, the blue and the white if between 60 and 30 degrees, and all three LEDs if greater than
+   60 degrees. Here is my final code:
 </p>
 
 <pre>
 <code>
-  
+//Lights up LEDs based on sensor angle
+
+int updateInterval = 1; //used to change time interval
+unsigned long prevMillis; //previous time val in milliseconds
+
+class Led {
+  int pin;
+
+  public:
+  Led(int p) {
+    pin = p;
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, LOW);
+  }
+
+  void onLed() {
+    digitalWrite(pin, HIGH);
+  }
+
+  void offLed() {
+    digitalWrite(pin, LOW);
+  }
+};
+
+Led led1B(21);
+Led led2W(22);
+Led led3R(23);
+
+class BendSensor {
+  int analogPin;
+  long read;
+
+  public:
+  BendSensor(int aPin) {
+    //Initiate vars
+    analogPin = aPin;
+  }
+
+  void readDegrees() {
+    // read the input on sensor analog pin
+    int sensorVal = analogRead(analogPin);
+    // print value read *Edit this to translate val read to bend degrees using obtained
+    // equation, and then return that value
+    int degreeRead = (sensorVal - 222.02381)/22.44048;
+    if (degreeRead <= 30) {
+      led1B.onLed();
+      led2W.offLed();
+      led3R.offLed();
+    }
+    else if (degreeRead <= 60) {
+      led1B.onLed();
+      led2W.onLed();
+      led3R.offLed();
+    }
+    else {
+      led1B.onLed();
+      led2W.onLed();
+      led3R.onLed();
+    }
+    Serial.println((sensorVal - 222.02381)/22.44048); //change to return val read and update readDegrees header once eqn obtained
+  }
+};
+
+//Declare sensor object with its analog pin
+BendSensor sensor1(25);
+
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+void loop() {
+  //check if delay (updateInterval) has completed
+  if (millis() - prevMillis > updateInterval) {
+    sensor1.readDegrees();
+    //update the time
+    prevMillis = millis();
+  }
+}
+
 </pre>
 </code>
 
 <p class="margin">   
-  I tested the degree value using the serial plotter to make sure the code was accurate. Then, I altered the 
-  circuit to include three LEDs and I re-programmed the code to light up the blue LED if the angle was 
-  bent by 30 degrees or less, the blue and the white if between 60 and 30 degrees, and all three LEDs if greater than
-   60 degrees. Below is a video of the bending sensor:
+  Below is a video of the bending sensor:
 </p>
 
 <video width="480" height="640" controls>
-  <source src="../03_fabrication/softRobotFirstAttempt.mp4" type="video/mp4">
+  <source src="../06_inputs/wkSixLEDsVideo.mp4" type="video/mp4">
 </video>
 
 <p class="margin">   
