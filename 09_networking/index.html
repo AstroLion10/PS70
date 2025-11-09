@@ -25,28 +25,60 @@
 
 <h3>Week 9: Radio, WiFi, Bluetooth (IoT)</h3>
 
-
-<p class="margin">   </p>
-<div class="flexrow">
-  <a id="btn" href="wk9.zip" download>Download my files from this week!
-  </a>
-</div>
-<p class="margin">   </p>
-
-<h4>Assignment: Integrate a Sensor to a Computer Graphics Display with Websockets</h4>
+<h4>Assignment: Integrate a Sensor With a Computer Display Using Websockets</h4>
 
 <p class="margin">  
-  This week, I attempted to connect a pressure sensor to a websocket. Below is a photo of an initial circuit.
+  This week, I connected a pressure sensor to a Wifi-based computer display using a websocket. 
+  To begin, I created a small velostat-based pressure sensor to have an input device to graph
+   values from. More detailed steps on creating the sensor are in <a href="../06_inputs/index.html">the Week 6 page</a>.
+  In order to solve the problem of the wires falling out of the sensor encountered when making the flex sensor for Week 6,
+  I used thinner wires and coiled their ends before attaching them to the sensor so that they would 
+  be more securely attached. Below is a picture of the pressure sensor:
+</p>
+
+<image style = "width: 50%"src = "../09_networking/wkNineSensor.jpg" alt = "Small Pressure Sensor"> </image>
+
+<p class="margin"> 
+  To implement the software aspect, I imported the websockets tutorial code from the <a href="https://nathanmelenbrink.github.io/ps70/09_networking/index.html">PS70 course webpage</a> 
+  into Arduino. Then, I modified the code to graph the values of only one sensor. When compiling the code, 
+  many errors showed up that prevented it from running. Credit to Alyssa for helping me realize that the 
+  libraries obtained from Arduino library search were incorrect. After tailoring the code for one sensor, I wired an initial 
+  circuit configuration for testing the Wifi-integrated sensor readings:
 </p>
 
 <image style = "width: 50%"src = "../09_networking/wkNineCircuit.jpg" alt = "Vacuum Formed Mold"> </image>
 <br></br>
 
-<p class="margin"> 
-  Below is a photo of the velostat sensor I made.
+<p class="margin">  
+  Once the Arduino errors were resolved (thank you to Alyssa for helping), I pasted the ESP32 IP address 
+  link provided by the Serial Monitor into a web browser. This revealed a website with the graph plotter.
+   At first, the plotter only showed zero-values. After de-bugging the circuit, I got the graphed values 
+   to correllate to how much pressure I applied to the sensor. To include an output device, I integrated an
+   LED into the circuit (pin 33) and modified the code for the microcontroller to turn the LED on when 
+   the pressure applied to the sensor exceeded a certain value. Below is the complete Arduino code file:
 </p>
 
-<image style = "width: 50%"src = "../09_networking/wkNineSensor.jpg" alt = "Vacuum Formed Mold"> </image>
+<p class="margin">   </p>
+<div class="flexrow">
+  <a id="btn" href="09_networking/PS70wk9HCCode.ino" download>Arduino Websocket Code</a>
+</div>
+<p class="margin">   </p>
+
+<p class="margin">  
+   Here is the working, Wifi-based websocket site
+   streaming data from the sensor with the microcontroller operating the LED:
+</p>
+
+<video width="480" height="640" controls>
+  <source src="../09_networking/wk9HCgraphVideo.mp4" type="video/mp4">
+</video>
+
+<p class="margin"> 
+  Sources:
+  <br></br>https://nathanmelenbrink.github.io/ps70/09_networking/index.html
+
+
+</p>
 
 
 </div>
