@@ -95,6 +95,73 @@ Then, I trimmed the velostat to adequate lengths for each of the fingers, and la
 <image style = "width: 50%"src = "../13_finalproject/fpWiresTwo.jpg" alt = "Model Image 1"> </image>
 <image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Model Image 1"> </image>
 
+<p class="margin">Arduino Code Used to Test the Sensors:</p>
+
+<code>
+<pre>
+//Returns number related to angle of bend from one velostat bend sensor
+
+int updateInterval = 1; //used to change time interval
+unsigned long prevMillis; //previous time val in milliseconds
+
+class BendSensor {
+  int analogPin;
+  long read;
+
+  public:
+  BendSensor(int aPin) {
+    //Initiate vars
+    analogPin = aPin;
+  }
+
+  void readDegrees() {
+    // read the input on sensor analog pin
+    int sensorVal = analogRead(analogPin);
+    // print value read *Edit this to translate val read to bend degrees using obtained
+    // equation, and then return that value
+    Serial.print("2500 3000 ");
+    Serial.println(sensorVal); //change to return val read and update readDegrees header once eqn obtained
+  }
+};
+
+//Declare sensor object with its analog pin
+BendSensor sensor1(13);
+BendSensor sensor2(12);
+BendSensor sensor3(14);
+BendSensor sensor4(27);
+BendSensor sensor5(26);
+
+
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+void loop() {
+  //check if delay (updateInterval) has completed
+  if (millis() - prevMillis > updateInterval) {
+    Serial.print("sensor1: ");
+    sensor1.readDegrees();
+    
+    Serial.print("sensor2: ");
+    sensor2.readDegrees();
+
+    Serial.print("sensor3: ");
+    sensor3.readDegrees();
+
+    Serial.print("sensor4: ");
+    sensor4.readDegrees();
+
+    Serial.print("sensor5: ");
+    sensor5.readDegrees();
+
+    //update the time
+    prevMillis = millis();
+  }
+}
+</pre>
+</code>
+
 </div>
 </xmp>
 </body>
