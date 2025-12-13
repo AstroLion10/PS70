@@ -129,8 +129,6 @@ I trimmed the velostat to adequate lengths for each of the fingers, and layered 
 
 <pre>
 <code>
-//Returns number related to angle of bend from one velostat bend sensor
-
 int updateInterval = 1; //used to change time interval
 unsigned long prevMillis; //previous time val in milliseconds
 
@@ -192,70 +190,88 @@ void loop() {
 </code>
 </pre>
 
+<br></br>
 <p class="margin">
-  After assessing each sensor using the Arduino serial plotter, it became clear that the larger sensors on the index, middle, ring, and little fingers
+  After testing each sensor with the Arduino serial plotter, it became clear that the large sensors on the index, middle, ring, and little fingers
   did not exhibit a suffient change in readings when bent or unbent. They mainly fluctuated during movement. Thus, I had to remove these sensors and create
-  new, smaller ones for the central finger joints.
+  new, smaller ones for the central finger joints. Below is a photo of the smaller sensors:
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSmallerSensors.jpg" alt = "Smaller Sensors on Glove"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpThumbSensorCloseUp.jpg" alt = "Small Sensor Close Up on Glove"> </image>
 
+<br></br>
 <p class="margin">
   After testing the new sensors, they exhibited a measurable change between bent and unbent positions. Thus, I was able to 
-  calibrate each and integrate their calibration into the code. After callibrating the fingers, the next step was to write the 
+  calibrate each and integrate their calibration into the code. After calibrating the fingers, the next step was to write the 
   algorithm for classifying five different hand positions: Hi, Point, Thumbs Up, Okay, and Peace. Once this worked within Arduino,
   I wired five LED lights to the circuit board and modified the code so that one LED would light up for each hand position:
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpLEDsTest.jpg" alt = "LED's"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpGreyGlove.jpg" alt = "Grey Glove"> </image>
 
-
+<br></br>
 <p class="margin">
   Once the LEDs were tested, all that was left was to create an enclosure for the breadboard with a display and test it. I decided to make the 
-  closure out of acrylic using a press-fit structure. To begin, I modeled each part separately on Fusion:
+  enclosure out of acrylic using a press-fit structure. To begin, I modeled each part separately on Fusion:
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpEnclFront.png" alt = "Front"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclTop.png" alt = "Top"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclBottom.png" alt = "Bottom"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclLeft.png" alt = "Left"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclRight.png" alt = "Right"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclBack.png" alt = "Back"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpEnclFoot.png" alt = "Foot"> </image>
 
+<br></br>
 <p class="margin">
   DXF file downloads for the acrylic parts:
-  <br></br><a download href='../13_finalproject/HCbackdrop.dxf'>Front</a>
-  <br></br><a download href='../13_finalproject/HCtop.dxf'>Top</a>
-  <br></br><a download href='../13_finalproject/HCbottom.dxf'>Bottom</a>
-  <br></br><a download href='../13_finalproject/HCleft.dxf'>Left</a>
-  <br></br><a download href='../13_finalproject/HCright.dxf'>Right</a>
-  <br></br><a download href='../13_finalproject/HCBack.dxf'>Back</a>
-  <br></br><a download href='../13_finalproject/HCfoot.dxf'>Foot</a>
+  <br></br>
+  <a download href='../13_finalproject/HCbackdrop.dxf'>Front</a>
+  <a download href='../13_finalproject/HCtop.dxf'>Top</a>
+  <a download href='../13_finalproject/HCbottom.dxf'>Bottom</a>
+  <a download href='../13_finalproject/HCleft.dxf'>Left</a>
+  <a download href='../13_finalproject/HCright.dxf'>Right</a>
+  <a download href='../13_finalproject/HCBack.dxf'>Back</a>
+  <a download href='../13_finalproject/HCfoot.dxf'>Foot</a>
 </p>
 
 <p class="margin">Then, I laser-cut the parts on clear acrylic.</p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpCutAcrylic.jpg" alt = "Laser Cut Acrylic Parts"> </image>
 
+<br></br>
 <p class="margin">
-  After peeling off the protective paper layer, I attached the LED lights to the hole ports of the front backdrop using hot glue. I assembled the 
-  enclosure with hot-glue as well, and I used pin-socket wires to connect the LED's to the breadboard. After testing the LEDs,
+  After peeling off the protective paper layer, I attached the LED lights to the hole ports of the front backdrop using hot glue. I then assembled the 
+  enclosure with hotglue, and I used pin-socket wires to connect the LEDs to the breadboard. After testing the LEDs,
   adding labels to the backdrop for the hand positions, and re-wiring the breadboard, the sensing glove was complete!
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpFinalThumbsUp.jpg" alt = "Thumbs Up"> </image>
 
+<br></br>
 <p class="margin">
-  Due to the nature of velostat, I had to consistently re-calibrate the sensors before using the glove since the calibration values changed over time. I also had to repeatedly bend and 
-  unbend the glove right before used in order to get the correct values since excercising the velostat changes the resistance levels it exhibits, and I initially callibrated the sensors
-  after bending them a few times for more consistent values.
+  Fabrication Note: Due to the nature of velostat, I had to consistently re-calibrate the sensors before testing the glove since the calibration values changed over time. I also had to repeatedly bend and 
+  unbend the glove right before demo-ing it in order to get the correct values since excercising the velostat changes the resistance levels it exhibits, and I initially calibrated the sensors
+  after repeatedly bending them for more consistent values.
 </p>
 
 <p class="margin">
-  Below is the final code I used for the fully-functioning sensing glove system. I employed traditional piano numbering for the fingers, so "finger 1" is the thumb, 
+  Below is the final code used for the fully-functioning sensing glove system. 
+</p>
+
+<p class="margin">
+I employed traditional piano numbering for the fingers, so "finger 1" is the thumb, 
   "finger 2" the index finger, and so on.
 </p>
 
@@ -394,8 +410,9 @@ void loop() {
 </pre>
 </code>
 
+<br></bt>
 <p class="margin">
-  Thank you to Nathan, Bobby, Kassia, Jessica, Alyssa, and all the course staff for their help on this project and throughout the course.
+  Thank you to Nathan, Bobby, Kassia, Jessica, Alyssa, and all the course staff for their help on this project.
 </p>
 
 </div>
