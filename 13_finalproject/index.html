@@ -25,10 +25,13 @@
 
 <h3>Final Project: Initial Sensing System for Assistive Exoskeleton Glove for Astronauts</h3>
 
+<br></br>
 <h4>Demo Video: <a href="https://youtu.be/CgMXPvm5mTw?si=gArcHX8leupdMDsy">https://youtu.be/CgMXPvm5mTw?si=gArcHX8leupdMDsy</a></h4>
 
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/PS70FinalFront.png" alt = "Thumbs Up"> </image>
 
+<br></br>
 <p class="margin"> 
 For my final project, I created a wearable sensing glove that can be used to classify finger bending 
 in order to work towards creating a full soft robotic assistive astronaut glove. A fully integrated sensing glove is crucial
@@ -37,74 +40,95 @@ in order to trigger coordinated actuation. This glove is one step towards this, 
  to classify hand positions. Below is a 3D Model of what one option for soft robotic actuation could look like.
 </p>
 
-<p class="margin">Soft Robotic Glove 3D Model Images:</p>
-
 <image style = "width: 50%"src = "../13_finalproject/Screenshot 2025-10-09 115312.png" alt = "Model Image 1"> </image>
-<br></br><image style = "width: 50%"src = "../13_finalproject/Screenshot 2025-10-09 115331.png" alt = "Model Image 2"> </image>
+<br></br>
+<image style = "width: 50%"src = "../13_finalproject/Screenshot 2025-10-09 115331.png" alt = "Model Image 2"> </image>
 
 <p class="margin">
-  <br></br>3D Model Download: <a download href='../13_finalproject/Soft_Robotic_Glove_Model.stl'> Soft Robotic Actuators </a>
+  <br></br>
+  3D Model Download: <a download href='../13_finalproject/Soft_Robotic_Glove_Model.stl'> Soft Robotic Actuators </a>
 </p>
 
-<p class="margin">Fabrication Process:</p>
+<p class="margin">
+  Since a robust actuation technology would likely require a full research lab and high amount of funding to fabricate, for my final project,
+  I focused on the sensing system.
+</p>
+
+<h4>Fabrication Process:</h4>
 
 <p class="margin">
-  To fabricate the initial sensing components for the soft robotic glove, I first started by making five velostat sensors, one for each finger.
-  I gathered my initial materials and tools: copper tape, velostat, scotch tape, scissors, and conductive steel thread.
+  To fabricate the initial sensing components for the soft robotic glove, I started by making five velostat sensors, one for each finger.
+  I gathered initial materials and tools: copper tape, velostat, scotch tape, scissors, and conductive steel thread.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpInitialMaterialsE.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
 I trimmed the velostat to adequate lengths for each of the fingers, and layered a slightly smaller piece of copper tape on each side.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsOne.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsTwo.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsThree.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
-  After this, I added conductive steel thread on each side of the copper and bound it to the sensor using scotch tape, which would provide insulation. 
+  After this, I added conductive steel thread on the outside of the copper segments and bound it to the sensor using scotch tape, which would provide electrical insulation. 
   The full details and instructions reference for creating velostat sensors from Luc's Tech Blog are linked in my <a href="../06_inputs/index.html">Week 6 documentation</a>.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsFour.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
   I attached the sensors to the fabric glove using dots of hot glue and sewed the copper thread towards the wrist.
 </p>
 
-
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsFive.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsSix.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsSeven.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsEight.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsNine.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
-  Then, I cut a solder board with the vertical bandsaw, and threaded the steel threads to holes in the board. This took a couple hours to complete.
+  Then, I cut a protoboard with the vertical bandsaw and threaded the steel threads to holes in the board. This took hours to complete.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpThreadTen.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
-  To add the electronics, I then soldered the needed wires to the ten sensor ports.
+  To integrate the electronics, I then soldered the needed wires to the ten sensor ports.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSolder.jpg" alt = "Model Image 1"> </image>
 
+<br></br>
 <p class="margin">
   Lastly, I connected the wires to the circuit board using a voltage divider electronics structure with one-hundred-ohm resistors.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpWiresOne.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpWiresTwo.jpg" alt = "Model Image 1"> </image>
+<br></br>
 <image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Model Image 1"> </image>
 
-<p class="margin">Below is the initial Arduino code used to test the sensors:</p>
+<br></br>
+<p class="margin">
+  Below is the initial Arduino code used to test the sensors:
+</p>
 
-<code>
 <pre>
+<code>
 //Returns number related to angle of bend from one velostat bend sensor
 
 int updateInterval = 1; //used to change time interval
@@ -165,8 +189,8 @@ void loop() {
     prevMillis = millis();
   }
 }
-</pre>
 </code>
+</pre>
 
 <p class="margin">
   After assessing each sensor using the Arduino serial plotter, it became clear that the larger sensors on the index, middle, ring, and little fingers
