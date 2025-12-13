@@ -34,7 +34,7 @@ For my final project, I created a wearable sensing glove that can be used to cla
 in order to work towards creating a full soft robotic assistive astronaut glove. A fully integrated sensing glove is crucial
 in order to give adequate feedback, motion and pressure sensing, and movement signals to the soft robotic components 
 in order to trigger coordinated actuation. This glove is one step towards this, enabling finger bending characterization
- to classify hand positions.
+ to classify hand positions. Below is a 3D Model of what one option for soft robotic actuation could look like.
 </p>
 
 <p class="margin">Soft Robotic Glove 3D Model Images:</p>
@@ -56,7 +56,7 @@ in order to trigger coordinated actuation. This glove is one step towards this, 
 <image style = "width: 50%"src = "../13_finalproject/fpInitialMaterialsE.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-Then, I trimmed the velostat to adequate lengths for each of the fingers, and layered a slightly smaller piece of copper tape on each side.
+I trimmed the velostat to adequate lengths for each of the fingers, and layered a slightly smaller piece of copper tape on each side.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsOne.jpg" alt = "Model Image 1"> </image>
@@ -64,13 +64,14 @@ Then, I trimmed the velostat to adequate lengths for each of the fingers, and la
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsThree.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-  After this, I added conductive steel thread on each side of the copper and bound it to the sensor using scotch tape, which would provide insulation.
+  After this, I added conductive steel thread on each side of the copper and bound it to the sensor using scotch tape, which would provide insulation. 
+  The full details and instructions reference for creating velostat sensors from Luc's Tech Blog are linked in my <a href="../06_inputs/index.html">Week 6 documentation</a>.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsFour.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-  Then, I attached the sensors to the fabric glove using dots of hot glue and sewed the copper thread towards the wrist.
+  I attached the sensors to the fabric glove using dots of hot glue and sewed the copper thread towards the wrist.
 </p>
 
 
@@ -81,26 +82,26 @@ Then, I trimmed the velostat to adequate lengths for each of the fingers, and la
 <image style = "width: 50%"src = "../13_finalproject/fpSensorsNine.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-  Then, I cut a solder board with the vertical bandsaw, and meticulously threaded the steel threads to holes in the board. This took hours to complete.
+  Then, I cut a solder board with the vertical bandsaw, and threaded the steel threads to holes in the board. This took a couple hours to complete.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpThreadTen.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-  To add the electronics, I then soldered the needed wires to the eight sensor ports.
+  To add the electronics, I then soldered the needed wires to the ten sensor ports.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpSolder.jpg" alt = "Model Image 1"> </image>
 
 <p class="margin">
-  Lastly, I connected the wires to the circuit board using a voltage divider electronics structure with one hundred ohm resistors. And voila, the electronic sensing glove:
+  Lastly, I connected the wires to the circuit board using a voltage divider electronics structure with one-hundred-ohm resistors.
 </p>
 
 <image style = "width: 50%"src = "../13_finalproject/fpWiresOne.jpg" alt = "Model Image 1"> </image>
 <image style = "width: 50%"src = "../13_finalproject/fpWiresTwo.jpg" alt = "Model Image 1"> </image>
 <image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Model Image 1"> </image>
 
-<p class="margin">Arduino Code Used to Test the Sensors:</p>
+<p class="margin">Below is the initial Arduino code used to test the sensors:</p>
 
 <code>
 <pre>
@@ -167,7 +168,208 @@ void loop() {
 </pre>
 </code>
 
+<p class="margin">
+  After assessing each sensor using the Arduino serial plotter, it became clear that the larger sensors on the index, middle, ring, and little fingers
+  did not exhibit a suffient change in readings when bent or unbent. They mainly fluctuated during movement. Thus, I had to remove these sensors and create
+  new, smaller ones for the central finger joints.
+</p>
 
+<image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Smaller Sensors on Glove"> </image>
+
+<p class="margin">
+  After testing the new sensors, they exhibited a measurable change between bent and unbent positions. Thus, I was able to 
+  calibrate each and integrate their calibration into the code. After callibrating the fingers, the next step was to write the 
+  algorithm for classifying five different hand positions: Hi, Point, Thumbs Up, Okay, and Peace. Once this worked within Arduino,
+  I wired five LED lights to the circuit board and modified the code so that one LED would light up for each hand position:
+</p>
+
+<image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "LED's"> </image>
+
+<p class="margin">
+  Once the LEDs were tested, all that was left was to create an enclosure for the breadboard with a display and test it. I decided to make the 
+  closure out of acrylic using a press-fit structure. To begin, I modeled each part separately on Fusion:
+</p>
+
+<image style = "width: 50%"src = "../13_finalproject/fpEnclFront.png" alt = "Front"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclTop.png" alt = "Top"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclBottom.png" alt = "Bottom"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclLeft.png" alt = "Left"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclRight.png" alt = "Right"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclBack.png" alt = "Back"> </image>
+<image style = "width: 50%"src = "../13_finalproject/fpEnclFoot.png" alt = "Foot"> </image>
+
+<p class="margin">
+  DXF file downloads for the acrylic parts:
+  <br></br><a download href='../13_finalproject/HCbackdrop.dxf'>Front</a>
+  <br></br><a download href='../13_finalproject/HCtop.dxf'>Top</a>
+  <br></br><a download href='../13_finalproject/HCbottom.dxf'>Bottom</a>
+  <br></br><a download href='../13_finalproject/HCleft.dxf'>Left</a>
+  <br></br><a download href='../13_finalproject/HCright.dxf'>Right</a>
+  <br></br><a download href='../13_finalproject/HCBack.dxf'>Back</a>
+  <br></br><a download href='../13_finalproject/HCfoot.dxf'>Foot</a>
+</p>
+
+<p class="margin">Then, I laser-cut the parts on clear acrylic.</p>
+
+<image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Model Image 1"> </image>
+
+<p class="margin">
+  After peeling off the protective paper layer, I attached the LED lights to the hole ports of the front backdrop using hot glue. I assembled the 
+  enclosure with hot-glue as well, and I used pin-socket wires to connect the LED's to the breadboard. After testing the LEDs,
+  adding labels to the backdrop for the hand positions, and re-wiring the breadboard, the sensing glove was complete!
+</p>
+
+<image style = "width: 50%"src = "../13_finalproject/fpWiresThreeFull.jpg" alt = "Model Image 1"> </image>
+
+<p class="margin">
+  Due to the nature of velostat, I had to consistently re-calibrate the sensors before using the glove since the calibration values changed over time. I also had to repeatedly bend and 
+  unbend the glove right before used in order to get the correct values since excercising the velostat changes the resistance levels it exhibits, and I initially callibrated the sensors
+  after bending them a few times for more consistent values.
+</p>
+
+<p class="margin">
+  Below is the final code I used for the fully-functioning sensing glove system. I employed traditional piano numbering for the fingers, so "finger 1" is the thumb, 
+  "finger 2" the index finger, and so on.
+</p>
+
+<code>
+<pre>
+class BendSensor
+{
+  int analogPin;
+  int threshold;
+  int val;
+
+  public:
+  BendSensor(int aPin, int thresh)
+  {
+    analogPin = aPin;
+    pinMode(analogPin, INPUT);
+    threshold = thresh;
+    val = 0;
+  }
+
+  int getVal()
+  {
+    val = analogRead(analogPin);
+    return val;
+  }
+
+  bool isBent()
+  {
+    bool result = false;
+    if (getVal() > threshold)
+    {
+      result = true;
+    }
+    return result;
+  }
+};
+
+class Led
+{
+  int digitalPin;
+
+  public:
+  Led(int dPin)
+  {
+    digitalPin = dPin;
+    pinMode(digitalPin, OUTPUT);
+    digitalWrite(digitalPin, LOW);
+  }
+
+  void on()
+  {
+    digitalWrite(digitalPin, HIGH);
+  }
+  void off()
+  {
+    digitalWrite(digitalPin, LOW);
+  }
+};
+
+BendSensor finger2(12, 100);
+BendSensor finger3(14, 300);
+BendSensor finger4(27, 150);
+BendSensor finger5(26, 150);
+
+Led light1(25);
+Led light2(33);
+Led light3(32);
+Led light4(22);
+Led light5(23);
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  //Code used to calibrate sensors:
+  //Serial.print("0 500 ");
+  //Serial.println(finger2.getVal());
+  //Serial.println(finger3.getVal());
+  //Serial.println(finger4.getVal());
+  //Serial.println(finger5.getVal());
+  //delay(2);
+
+  //Hand positions
+  if (!finger2.isBent() && !finger3.isBent() && !finger4.isBent()) 
+  {
+    light1.on();
+    light2.off();
+    light3.off();
+    light4.off();
+    light5.off();
+    //Serial.println("1 Hi");
+  }
+  else if (!finger2.isBent() && finger3.isBent() && finger4.isBent()) 
+  {
+    light1.off();
+    light2.on();
+    light3.off();
+    light4.off();
+    light5.off();
+    //Serial.println("2 Point");
+  }
+  else if (finger2.isBent() && finger3.isBent() && finger4.isBent()) 
+  {
+    light1.off();
+    light2.off();
+    light3.on();
+    light4.off();
+    light5.off();    
+    //Serial.println("3 Thumbs Up");
+  }
+  else if (finger2.isBent() && !finger3.isBent() && !finger4.isBent()) 
+  {
+    light1.off();
+    light2.off();
+    light3.off();
+    light4.on();
+    light5.off();    
+    //Serial.println("4 OK");
+  }
+  else if (!finger2.isBent() && !finger3.isBent() && finger4.isBent()) 
+  {
+    light1.off();
+    light2.off();
+    light3.off();
+    light4.off();
+    light5.on();
+    //Serial.println("5 Peace");
+  }
+}
+
+//finger2 compVal: 100
+//finger3 compVal: 300
+//finger4 compVal: 150
+//finger5 compVal: 150
+</pre>
+</code>
+
+<p class="margin">
+  Thank you to Nathan, Bobby, Kassia, Jessica, Alyssa, and all the course staff for their help on this project and throughout the course.
+</p>
 
 </div>
 </xmp>
